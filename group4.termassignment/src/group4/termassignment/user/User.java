@@ -7,4 +7,9 @@ public class User extends Block {
 
 	public UserMQTT userMQTT = new UserMQTT(4);
 
+	public String subscribeTopics() {
+		String topics = "notifyUser";
+		return topics;
+	}
+
 }

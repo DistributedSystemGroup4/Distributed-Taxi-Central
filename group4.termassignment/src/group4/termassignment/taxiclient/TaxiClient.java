@@ -24,6 +24,8 @@ public class TaxiClient extends Block {
 		{
 			taxi.confirm = true;
 			taxi.location = tourOrder.address;
+			tourOrder.taxiAlias = taxi.taxiAlias;
+			tourOrder.taxiAcceptOrder = true;
 		}
 	}
 
@@ -45,6 +47,7 @@ public class TaxiClient extends Block {
 		else
 		{
 			taxi.confirm = false;
+			tourOrder.taxiAlias = "";
 			tourOrder.taxiAcceptOrder = false; //change from "true" to "false"
 		}
 	}
