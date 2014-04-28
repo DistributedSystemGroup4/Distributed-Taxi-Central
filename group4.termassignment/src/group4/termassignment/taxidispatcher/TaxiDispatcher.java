@@ -3,18 +3,17 @@ package group4.termassignment.taxidispatcher;
 import group4.termassignment.taxisystem.component.TaxiInfo;
 import group4.termassignment.taxisystem.component.TourOrder;
 import no.ntnu.item.arctis.runtime.Block;
+import no.ntnu.item.ttm4115.simulation.routeplanner.Distance;
 import no.ntnu.item.ttm4115.simulation.routeplanner.Journey;
-import no.ntnu.item.ttm4115.simulation.routeplanner.Route;
-import no.ntnu.item.ttm4115.simulation.routeplanner.RoutePlanner;
 
 public class TaxiDispatcher extends Block {
 
 	public TaxiInfo[] taxiId = new TaxiInfo[100];
 	public TourOrder[] orderId = new TourOrder[100];
-	public String USERREQUEST = "generic-map-ui-group04/userRequest";
-	public String NOTIFYUSER = "generic-map-ui-group04/notifyUser";
-	public String ORDERALLOCATE = "generic-map-ui-group04/orderAllocate";
-	public String TAXIUPDATE = "generic-map-ui-group04/taxiUpdate";
+	public String USERREQUEST = "ntnu/item/ttm4115/group4/userRequest";
+	public String NOTIFYUSER = "ntnu/item/ttm4115/group4/notifyUser";
+	public String ORDERALLOCATE = "ntnu/item/ttm4115/group4/orderAllocate";
+	public String TAXIUPDATE = "ntnu/item/ttm4115/group4/taxiUpdate";
 	public static int taxiQ = 0;
 	public static int userQ = 0;
 	public String notification = null;
@@ -22,6 +21,8 @@ public class TaxiDispatcher extends Block {
 	public java.lang.String messageOutTopic;
 	public String startAddress = null;
 	public String endAddress = null;
+	public no.ntnu.item.ttm4115.simulation.routeplanner.Route aRoute;
+	public no.ntnu.item.ttm4115.simulation.routeplanner.Journey aJourney;
 	
 	public void proceedMessage(Object data, String topic) 
 	{
@@ -99,18 +100,13 @@ public class TaxiDispatcher extends Block {
 		}
 	}
 
-	public Journey sendJourney ()
-	{
-		Journey j = new Journey(startAddress, endAddress);
-		return j;
-	}
-	
 	private boolean FindATaxi(TourOrder data) {
 		// TODO Auto-generated method stub
 		//Criteria for selection:
 		//1. shortest travel distance
 		//2. longest time
-		double minDistance = 0.0;
+		
+		Distance minDistance;
 		int candid = -1;
 		int i=0;
 		for(i = 0; i < taxiId.length; i++)
@@ -120,24 +116,31 @@ public class TaxiDispatcher extends Block {
 				//check distance. if distance < minDistance then update minDistance and candid = i
 				//since we go from element 0 (begin of array) so we start with the longest time element. 
 				//Thats why if distance = minDistance, we don't need to update anything with it
-				startAddress = taxiId[i].location;
-				endAddress = data.address;
-				sendJourney();
-				//Route r = receiveDistance(
+				aJourney = new Journey(taxiId[i].location, data.address);
+				if(aRoute != null)
+				{
+					for(int j=0;j<aRoute.legs.size();j++){
+						minDistance = aRoute.legs.get(j).distance;
+						int val = minDistance.value;
+					}
+					 
+				}				
 			}
 		}
 		if(candid == -1) //no taxi is available, dritt dårlig!!
 		{			
+			System.out.print("None is available");
 			return false;
 		}
 		//call send order to taxi
 		SendOrder(taxiId[candid], data);
+		System.out.print("taxiId " + candid + " got a go!!");
 		return true;
 	}
 
 	private void SendOrder(TaxiInfo taxiInfo, TourOrder data) {
 		// TODO Auto-generated method stub
-		messageOutTopic = "generic-map-ui-group04/orderAllocate/t" + taxiInfo.taxiAlias;
+		messageOutTopic = "ntnu/item/ttm4115/group4/orderAllocate/t" + taxiInfo.taxiAlias;
 		messageOutData = (Object) data;
 	}
 
@@ -207,7 +210,7 @@ public class TaxiDispatcher extends Block {
 
 	private void SendNotification(String userAlias, int i) {
 		// TODO Auto-generated method stub
-		messageOutTopic = "generic-map-ui-group04/notifyUser/u" + userAlias;
+		messageOutTopic = "ntnu/item/ttm4115/group4/notifyUser/u" + userAlias;
 		notification = "To user " + userAlias + ": Your order is placed in queue at number " + i;
 		messageOutData = (Object) notification;
 	}

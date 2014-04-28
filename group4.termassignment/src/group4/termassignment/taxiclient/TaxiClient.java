@@ -22,8 +22,7 @@ public class TaxiClient extends Block {
 	
 	public void acceptRequest() {
 		if(tourOrder != null)
-		{
-			taxi.confirm = true;
+		{			
 			taxi.destination = tourOrder.address;
 			tourOrder.taxiAlias = taxi.taxiAlias;
 			tourOrder.taxiAcceptOrder = true;
@@ -47,7 +46,6 @@ public class TaxiClient extends Block {
 			taxi.available = false;
 		else
 		{
-			taxi.confirm = false;
 			tourOrder.taxiAlias = "";
 			tourOrder.taxiAcceptOrder = false; //change from "true" to "false"
 		}

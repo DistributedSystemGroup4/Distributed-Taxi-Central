@@ -9,8 +9,8 @@ public class Taxi extends Block {
 
 	public TaxiMQTT taxiMQTT = new TaxiMQTT(4);
 
-	public String subscribeTopics() {
-		String topics = "generic-map-ui-group04/orderAllocate";
+	public String subscribeTopics(String alias) {
+		String topics = "ntnu/item/ttm4115/group4/orderAllocate/t" + alias;
 		return topics;
 	}
 

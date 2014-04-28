@@ -6,8 +6,8 @@ import group4.termassignment.taxisystem.component.TourOrder;
 
 public class TaxiMQTT extends Block {
 
-	public final static java.lang.String TAXIUPDATE = "generic-map-ui-group04/taxiUpdate";
-	public final static java.lang.String ORDERALLOCATE = "generic-map-ui-group04/orderAllocate";
+	public final static java.lang.String TAXIUPDATE = "ntnu/item/ttm4115/group4/taxiUpdate";
+	public final static java.lang.String ORDERALLOCATE = "ntnu/item/ttm4115/group4/orderAllocate";
 	public final int group;
 	
 	public TaxiMQTT(int group) {

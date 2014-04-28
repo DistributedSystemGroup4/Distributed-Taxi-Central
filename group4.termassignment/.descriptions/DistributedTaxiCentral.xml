@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<block
+    name="DistributedTaxiCentral" 
+    uuid="_D1eO087REeOS-6rKg9l2xA" 
+    status="under construction" 
+    type="system" 
+    >
+    <required>
+        <block name="c0" uuid="_TsahcLQ6EeOS-8S8m-qxIQ"/>
+        <block name="c1" uuid="_McMQcLNbEeOS-8S8m-qxIQ"/>
+        <block name="c2" uuid="_TTJwgLimEeOS-8S8m-qxIQ"/>
+    </required>
+</block>
