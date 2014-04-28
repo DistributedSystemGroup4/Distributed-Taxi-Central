@@ -6,8 +6,8 @@ import no.ntnu.item.arctis.runtime.Block;
 
 public class UserMQTT extends Block {
 public final int group;
-public final static java.lang.String NOTIFYUSER = "notifyUser";
-public final static java.lang.String USERREQUEST = "userRequest";
+public final static java.lang.String NOTIFYUSER = "generic-map-ui-group04/notifyUser";
+public final static java.lang.String USERREQUEST = "generic-map-ui-group04/userRequest";
  
 	/*public AdvancedConfiguration createConfig() {
 		return new AdvancedConfiguration(NOTIFYUSER, group);

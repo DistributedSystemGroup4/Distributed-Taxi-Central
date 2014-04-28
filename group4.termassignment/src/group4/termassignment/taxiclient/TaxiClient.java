@@ -17,13 +17,14 @@ public class TaxiClient extends Block {
 	{
 		taxi.taxiAlias = alias;
 		taxi.location = "Østre Gløshaugen, Trondheim";//default address
+		taxi.destination = null;
 	}
 	
 	public void acceptRequest() {
 		if(tourOrder != null)
 		{
 			taxi.confirm = true;
-			taxi.location = tourOrder.address;
+			taxi.destination = tourOrder.address;
 			tourOrder.taxiAlias = taxi.taxiAlias;
 			tourOrder.taxiAcceptOrder = true;
 		}

@@ -10,15 +10,20 @@ public class Taxi extends Block {
 	public TaxiMQTT taxiMQTT = new TaxiMQTT(4);
 
 	public String subscribeTopics() {
-		String topics = "orderAllocate";
+		String topics = "generic-map-ui-group04/orderAllocate";
 		return topics;
 	}
 
 	public Journey createJourney(TaxiInfo taxi) {
 	Journey journey = null;
 	if(taxi != null)
-		journey = new Journey(taxi.location, taxi.location);
-	return journey;
+	{
+		if(taxi.destination == null)
+			journey = new Journey(taxi.location, taxi.location);
+		else
+			journey = new Journey(taxi.location, taxi.destination);
+	}
+		return journey;
 	}
 
 
