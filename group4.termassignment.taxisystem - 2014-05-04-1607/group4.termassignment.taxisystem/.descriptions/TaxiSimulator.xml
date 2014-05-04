@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<block
+    name="TaxiSimulator" 
+    provider="Google" 
+    uuid="_rzU4o9HqEeO8oJFYErQ0Fw" 
+    status="under construction" 
+    type="block" 
+    >
+    <required>
+        <block name="c0" uuid="_IqxXsaPNEeOl8vvkd4XquA"/>
+        <block name="c1" uuid="_UoBM0aPNEeOl8vvkd4XquA"/>
+    </required>
+</block>
